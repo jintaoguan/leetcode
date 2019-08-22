@@ -11,6 +11,7 @@ public class Solution {
         TreeNode(int x) { val = x; }
     }
 
+    // solution 1
     public boolean isValidBST(TreeNode root) {
         return isValidBSTHelper(root, Long.MIN_VALUE, Long.MAX_VALUE);
     }
@@ -23,5 +24,22 @@ public class Solution {
             return false;
         }
         return isValidBSTHelper(root.left, min, root.val) && isValidBSTHelper(root.right, root.val, max);
+    }
+
+
+    // solution 2
+    TreeNode prev = null;
+    public boolean isValidBST2(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        if (!isValidBST2(root.left)) {
+            return false;
+        }
+        if (prev != null && prev.val >= root.val) {
+            return false;
+        }
+        prev = root;
+        return isValidBST2(root.right);
     }
 }
