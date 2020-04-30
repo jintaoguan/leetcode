@@ -9,28 +9,17 @@ public class Solution {
         if (strs == null || strs.length == 0) {
             return "";
         }
-        int minLength = Integer.MAX_VALUE;
-        for (String str : strs) {
-            if (str.length() < minLength) {
-                minLength = str.length();
-            }
-        }
-        boolean fail = false;
-        StringBuilder prefix = new StringBuilder();
-        for (int i = 0; i < minLength; i++) {
-            char ch = strs[0].charAt(i);
-            for (int j = 1; j < strs.length; j++) {
-                if (ch != strs[j].charAt(i)) {
-                    fail = true;
-                    break;
+        int len = strs[0].length();
+        for (int i = 0; i < len; ++i) {
+            for (int j = 1; j < strs.length; ++j) {
+                if (i >= strs[j].length()) {
+                    return strs[0].substring(0, i);
+                }
+                if (strs[0].charAt(i) != strs[j].charAt(i)) {
+                    return strs[0].substring(0, i);
                 }
             }
-            if (fail) {
-                break;
-            } else {
-                prefix.append(ch);
-            }
         }
-        return prefix.toString();
+        return strs[0];
     }
 }
