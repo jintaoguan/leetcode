@@ -11,20 +11,13 @@ public class Solution {
         if (nums == null || nums.length == 0) {
             return 0;
         }
-        if (nums.length == 1) {
-            return 1;
-        }
-        int index = 1;
-        int cur = 1;
-        int lastNum = nums[0];
-        while (cur < nums.length) {
-            if (nums[cur] != lastNum) {
-                nums[index] = nums[cur];
-                lastNum = nums[cur];
-                index++;
+        int last = 0;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] != nums[last]) {
+                last++;
+                nums[last] = nums[i];
             }
-            cur++;
         }
-        return index;
+        return last + 1;
     }
 }
